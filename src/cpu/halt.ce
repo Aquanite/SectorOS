@@ -1,6 +1,6 @@
-module Template.Internal;
-
+module SectorOS.Internal;
 
 extend from "C" void _native_hcf();
 
+[Inline]
 expose noreturn fun StopSystem() -> void { _native_hcf(); }

@@ -1,11 +1,12 @@
 #hint implicit-void-function
-module Template;
+managed module SectorOS;
 
-bring Template.Intrinsics;
-bring Template.Serial as Serial;
-bring Template.Internal as Internal;
+bring SectorOS.Intrinsics;
+bring SectorOS.Serial as Serial;
+bring SectorOS.Internal as Internal;
 
-export preserve jumptarget managed expose noreturn fun KernelMain() {
+[Export] [Preserve] [JumpTarget]
+expose noreturn fun KernelMain() {
     Serial.WriteString("Hello, world!\n");
     Internal.StopSystem();
 }

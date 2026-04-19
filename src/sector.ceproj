@@ -1,5 +1,5 @@
 type=Console
-output=template.bin
+output=Sector.bin
 ce=main.ce,intrinsic/intrinsic.ce
 ce=serial.ce,cpu/halt.ce
 asm=cpu/init.bas

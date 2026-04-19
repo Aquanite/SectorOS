@@ -1,9 +1,11 @@
 #hint implicit-void-function
-module Template.Serial;
+module SectorOS.Serial;
 
 
 // c passed as B0
-literal forceinline expose noreturn fun WriteChar(char c) {
+[Literal]
+[ForceInline]
+expose noreturn fun WriteChar(char c) {
     OUTPRT.S #1, #0x00001234, B0 // On BSEMU, port 0x1234 is STDOUT
 }
 

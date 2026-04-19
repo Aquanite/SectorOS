@@ -1,5 +1,5 @@
-# Template OS
+# SectorOS
 
-This is the template OS for BSlash.
+This is the SectorOS for BSlash.
 
-Compile with: `chancec template.ceproj`
+Compile with: `chancec sector.ceproj`

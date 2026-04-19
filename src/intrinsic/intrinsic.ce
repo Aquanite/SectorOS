@@ -1,124 +1,165 @@
 #hint implicit-void-function
-module Template.Intrinsics;
+module SectorOS.Intrinsics;
 
-literal forceinline expose noreturn fun BRK() // Break (INT 6)
+[Literal]
+[ForceInline]
+expose noreturn fun BRK() // Break (INT 6)
 {
     BRK
 }
 
-literal forceinline expose noreturn fun WRSTK(u32 value) // Write Stack Register
+[Literal]
+[ForceInline]
+expose noreturn fun WRSTK(u32 value) // Write Stack Register
 {
     WRSTK B0
 }
 
-literal forceinline expose noreturn fun WRFR(u32 value) // Write Stack Frame Register
+[Literal]
+[ForceInline]
+expose noreturn fun WRFR(u32 value) // Write Stack Frame Register
 {
     WRFR B0
 }
 
-literal forceinline expose noreturn fun SYSWR_0(u32 value) -> void // Write System Register 0
+[Literal]
+[ForceInline]
+expose noreturn fun SYSWR_0(u32 value) -> void // Write System Register 0
 {
     SYSWR CTL[0], B0
 }
 
-literal forceinline expose noreturn fun SYSWR_1(u32 value) -> void // Write System Register 1
+[Literal]
+[ForceInline]
+expose noreturn fun SYSWR_1(u32 value) -> void // Write System Register 1
 {
     SYSWR CTL[1], B0
 }
 
-literal forceinline expose noreturn fun SYSWR_2(u32 value) -> void // Write System Register 2
+[Literal]
+[ForceInline]
+expose noreturn fun SYSWR_2(u32 value) -> void // Write System Register 2
 {
     SYSWR CTL[2], B0
 }
 
-literal forceinline expose noreturn fun SYSWR_3(u32 value) -> void // Write System Register 3
+[Literal]
+[ForceInline]
+expose noreturn fun SYSWR_3(u32 value) -> void // Write System Register 3
 {
     SYSWR CTL[3], B0
 }
 
-literal forceinline expose noreturn fun SYSWR_4(u32 value) -> void // Write System Register 4
+[Literal]
+[ForceInline]
+expose noreturn fun SYSWR_4(u32 value) -> void // Write System Register 4
 {
     SYSWR CTL[4], B0
 }
 
-literal forceinline expose noreturn fun SYSWR_5(u32 value) -> void // Write System Register 5
+[Literal]
+[ForceInline]
+expose noreturn fun SYSWR_5(u32 value) -> void // Write System Register 5
 {
     SYSWR CTL[5], B0
 }
 
-literal forceinline expose noreturn fun SYSWR_6(u32 value) -> void // Write System Register 6
+[Literal]
+[ForceInline]
+expose noreturn fun SYSWR_6(u32 value) -> void // Write System Register 6
 {
     SYSWR CTL[6], B0
 }
 
-literal forceinline expose noreturn fun SYSWR_7(u32 value) -> void // Write System Register 7
+[Literal]
+[ForceInline]
+expose noreturn fun SYSWR_7(u32 value) -> void // Write System Register 7
 {
     SYSWR CTL[7], B0
 }
 
-literal forceinline expose noreturn fun IRET() // Interrupt Return
+[Literal]
+[ForceInline]
+expose noreturn fun IRET() // Interrupt Return
 {
     IRET
 }
 
-literal forceinline expose noreturn fun DIS() // Disable Interrupts
+[Literal]
+[ForceInline]
+expose noreturn fun DIS() // Disable Interrupts
 {
     DIS
 }
 
-literal forceinline expose noreturn fun ENI() // Enable Interrupts
+[Literal]
+[ForceInline]
+expose noreturn fun ENI() // Enable Interrupts
 {
     ENI
 }
 
-literal forceinline expose noreturn fun POPSTAT() // Pop Status Register
+[Literal]
+[ForceInline]
+expose noreturn fun POPSTAT() // Pop Status Register
 {
     POPSTAT
 }
 
-literal forceinline expose noreturn fun PSTAT() // Push Status Register
+[Literal]
+[ForceInline]
+expose noreturn fun PSTAT() // Push Status Register
 {
     PSTAT
 }
 
-literal expose fun RDTSC() -> u32 // Get RDTSC
+[Literal]
+expose fun RDTSC() -> u32 // Get RDTSC
 {
     RDTSC B0
     RET
 }
 
-literal forceinline expose fun CICPY(u32[] src, u32[] dst, u32 bytes) -> void // In-Circuit Copy
+[Literal]
+[ForceInline]
+expose fun CICPY(u32[] src, u32[] dst, u32 bytes) -> void // In-Circuit Copy
 {
     CICPY B0, B1, B2
 }
 
-literal expose fun HasCICPY() -> u32 // Has CICPY
+[Literal]
+expose fun HasCICPY() -> u32 // Has CICPY
 {
     CPUID #0x04
     ANDI32 B0, #0x00000001
     RET
 }
 
-literal expose fun MTCC() -> u32 // Core Count
+[Literal]
+expose fun MTCC() -> u32 // Core Count
 {
     MTCC B0
     RET
 }
 
-literal expose fun MTID() -> u32 // Current Core ID
+[Literal]
+expose fun MTID() -> u32 // Current Core ID
 {
     MTID B0
     RET
 }
 
-literal expose fun MTSTS(u32 core_id) -> u32 // Get Core Status
+[Literal]
+expose fun MTSTS(u32 core_id) -> u32 // Get Core Status
 {
     MTSTS B1, B0
     MOV B0, B1
     RET
 }
 
-literal forceinline expose noreturn fun MTSETIP(u32 entry_ip, u32 core_id) // Set Core IP
+[Literal]
+[ForceInline]
+expose noreturn fun MTSETIP(u32 entry_ip, u32 core_id) // Set Core IP
 {
     MTSETIP B0, B1
 }
