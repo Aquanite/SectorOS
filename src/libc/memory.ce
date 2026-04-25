@@ -1,0 +1,308 @@
+[Export]
+expose fun malloc(int size) -> void*
+{
+    ret null;
+}
+
+[Export]
+expose fun free(void *ptr) -> void
+{
+    (void)ptr;
+}
+
+[Export]
+expose fun realloc(void *ptr, int size) -> void*
+{
+    (void)ptr;
+    (void)size;
+    ret null;
+}
+
+[Export]
+expose fun memcpy(void *dest, constant void *src, ulong n) -> void*
+{
+    for (ulong i = 0; i < n; i++) {
+        ((u8*)dest)[i] = ((constant u8*)src)[i];
+    }
+
+    ret dest;
+}
+
+[Export]
+expose fun memset(void *s, int c, ulong n) -> void*
+{
+    for (ulong i = 0; i < n; i++) {
+        ((u8*)s)[i] = (u8)c;
+    }
+
+    ret s;
+}
+
+[Export]
+expose fun strlen(constant char *s) -> ulong
+{
+    ulong len = 0;
+    while (s[len] != 0) {
+        len++;
+    }
+    ret len;
+}
+
+[Export]
+expose fun strcmp(constant char *s1, constant char *s2) -> int
+{
+    ulong i = 0;
+    while (s1[i] != 0 && s2[i] != 0) {
+        if (s1[i] != s2[i]) {
+            ret (int)(s1[i] - s2[i]);
+        }
+        i++;
+    }
+    ret (int)(s1[i] - s2[i]);
+}
+
+[Export]
+expose fun write(int fildes, constant void *buf, ulong nbyte) -> long
+{
+    (void)fildes;
+    (void)buf;
+    (void)nbyte;
+    ret 0;
+}
+
+[Export]
+expose fun vsnprintf(char *str, ulong size, constant char *format, va_list ap) -> int
+{
+    (void)str;
+    (void)size;
+    (void)format;
+    (void)ap;
+    ret 0;
+}
+
+[Export]
+expose fun read(int fildes, void *buf, ulong nbyte) -> long
+{
+    (void)fildes;
+    (void)buf;
+    (void)nbyte;
+    ret 0;
+}
+
+[Export]
+expose fun fopen(constant char *filename, constant char *mode) -> void*
+{
+    (void)filename;
+    (void)mode;
+    ret null;
+}
+
+[Export]
+expose fun fclose(void *stream) -> int
+{
+    (void)stream;
+    ret 0;
+}
+
+[Export]
+expose fun fread(void *ptr, ulong size, ulong nmemb, void *stream) -> ulong
+{
+    (void)ptr;
+    (void)size;
+    (void)nmemb;
+    (void)stream;
+    ret 0;
+}
+
+[Export]
+expose fun fwrite(constant void *ptr, ulong size, ulong nmemb, void *stream) -> ulong
+{
+    (void)ptr;
+    (void)size;
+    (void)nmemb;
+    (void)stream;
+    ret 0;
+}
+
+[Export]
+expose fun fflush(void *stream) -> int
+{
+    (void)stream;
+    ret 0;
+}
+
+[Export]
+expose fun fseek(void *stream, long offset, int whence) -> int
+{
+    (void)stream;
+    (void)offset;
+    (void)whence;
+    ret 0;
+}
+
+[Export]
+expose fun ftell(void *stream) -> long
+{
+    (void)stream;
+    ret 0;
+}
+
+[Export]
+expose fun remove(constant char *filename) -> int
+{
+    (void)filename;
+    ret 0;
+}
+
+[Export]
+expose fun getcwd(char *buf, ulong size) -> char*
+{
+    (void)buf;
+    (void)size;
+    ret null;
+}
+
+[Export]
+expose fun close(int fildes) -> int
+{
+    (void)fildes;
+    ret 0;
+}
+
+[Export]
+expose fun getsockopt(int sockfd, int level, int optname, void *optval, ulong *optlen) -> int
+{
+    (void)sockfd;
+    (void)level;
+    (void)optname;
+    (void)optval;
+    (void)optlen;
+    ret 0;
+}
+
+[Export]
+expose fun setsockopt(int sockfd, int level, int optname, constant void *optval, ulong optlen) -> int
+{
+    (void)sockfd;
+    (void)level;
+    (void)optname;
+    (void)optval;
+    (void)optlen;
+    ret 0;
+}
+
+[Export]
+expose fun socket(int domain, int type, int protocol) -> int
+{
+    (void)domain;
+    (void)type;
+    (void)protocol;
+    ret 0;
+}
+
+[Export]
+expose fun bind(int sockfd, constant void *addr, ulong addrlen) -> int
+{
+    (void)sockfd;
+    (void)addr;
+    (void)addrlen;
+    ret 0;
+}
+
+[Export]
+expose fun listen(int sockfd, int backlog) -> int
+{
+    (void)sockfd;
+    (void)backlog;
+    ret 0;
+}
+
+[Export]
+expose fun accept(int sockfd, void *addr, ulong *addrlen) -> int
+{
+    (void)sockfd;
+    (void)addr;
+    (void)addrlen;
+    ret 0;
+}
+
+[Export]
+expose fun inet_addr(constant char *cp) -> uint
+{
+    (void)cp;
+    ret 0;
+}
+
+[Export]
+expose fun connect(int sockfd, constant void *addr, ulong addrlen) -> int
+{
+    (void)sockfd;
+    (void)addr;
+    (void)addrlen;
+    ret 0;
+}
+
+[Export]
+expose fun recv(int sockfd, void *buf, ulong len, int flags) -> long
+{
+    (void)sockfd;
+    (void)buf;
+    (void)len;
+    (void)flags;
+    ret 0;
+}
+
+[Export]
+expose fun send(int sockfd, constant void *buf, ulong len, int flags) -> long
+{
+    (void)sockfd;
+    (void)buf;
+    (void)len;
+    (void)flags;
+    ret 0;
+}
+
+[Export]
+expose fun shutdown(int sockfd, int how) -> int
+{
+    (void)sockfd;
+    (void)how;
+    ret 0;
+}
+
+[Export]
+[Literal]
+expose fun exit(int status) -> void
+{
+    breaklabel:
+    BRK
+    J #breaklabel
+}
+
+[Export]
+expose fun getenv(constant char *name) -> char*
+{
+    (void)name;
+    ret null;
+}
+
+[Export]
+expose fun getuid() -> int
+{
+    ret 0;
+}
+
+[Export]
+expose fun getpwuid(int uid) -> void*
+{
+    (void)uid;
+    ret null;
+}
+
+[Export]
+[Preserve]
+expose fun printf(constant char *format, ...) -> int
+{
+    (void)format;
+    ret 0;
+}

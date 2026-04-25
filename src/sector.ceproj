@@ -1,6 +1,6 @@
 type=Console
 output=Sector.bin
 ce=main.ce,intrinsic/intrinsic.ce
-ce=serial.ce,cpu/halt.ce
+ce=serial.ce,cpu/halt.ce,libc/memory.ce
 asm=cpu/init.bas
-args=--freestanding -bslash
+args=-bslash
