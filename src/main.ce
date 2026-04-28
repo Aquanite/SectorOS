@@ -19,5 +19,5 @@ expose noreturn fun KernelMain() /* Entry point */ {
     
     if (test + test2 == 2.0f) Serial.WriteLine("Correct");
 
-    Env.Exit(0);
+    Env.Exit((int)0xAFAFAFAF);
 }
