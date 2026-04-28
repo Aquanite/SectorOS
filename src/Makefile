@@ -6,7 +6,7 @@ CE := chancec
 CEPROJ := sector.ceproj
 CEFLAGS := -O3
 
-.PHONY: all build emulate verbose
+.PHONY: all build emulate verbose asm ccb
 
 all: build
 run: build emulate
@@ -16,6 +16,12 @@ build:
 
 verbose:
 	$(CE) $(CEPROJ) $(CEFLAGS) -vd
+
+asm:
+	$(CE) $(CEPROJ) $(CEFLAGS) -S
+
+ccb:
+	$(CE) $(CEPROJ) $(CEFLAGS) -Sccb
 
 emulate:
 	$(BSEMU) $(EMULATEE) $(BSEMUFLAGS)
