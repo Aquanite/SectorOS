@@ -5,8 +5,19 @@ bring SectorOS.Intrinsics;
 bring SectorOS.Serial as Serial;
 bring SectorOS.Internal as Internal;
 
+bring Std.Memory as Mem;
+bring Std.Environment as Env;
+bring Std.Exception as E;
+
+extend from "C" i32 write(i32, char*, int);
+
 [Export] [Preserve] [JumpTarget]
-expose noreturn fun KernelMain() {
-    Serial.WriteString("Hello, world!\n");
-    Internal.StopSystem();
+expose noreturn fun KernelMain() /* Entry point */ {
+    f32 test = 1.0f;
+
+    f32 test2 = 1.0f;
+    
+    if (test + test2 == 2.0f) Serial.WriteLine("Correct");
+
+    Env.Exit(0);
 }

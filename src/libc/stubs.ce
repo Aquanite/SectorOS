@@ -1,18 +1,28 @@
+bring SectorOS.Serial as Serial;
+bring Std.Exception as Exception;
+bring Std.Environment as Env;
+
+struct WSAData {
+};
+
 [Export]
 expose fun malloc(int size) -> void*
 {
+    Env.Exit((int)0xFADE0000);
     ret null;
 }
 
 [Export]
 expose fun free(void *ptr) -> void
 {
+    Env.Exit((int)0xFADE0001);
     (void)ptr;
 }
 
 [Export]
 expose fun realloc(void *ptr, int size) -> void*
 {
+    Env.Exit((int)0xFADE0002);
     (void)ptr;
     (void)size;
     ret null;
@@ -62,11 +72,19 @@ expose fun strcmp(constant char *s1, constant char *s2) -> int
 }
 
 [Export]
-expose fun write(int fildes, constant void *buf, ulong nbyte) -> long
+managed expose fun write(int fildes, constant void *buf, ulong nbyte) -> long
 {
-    (void)fildes;
-    (void)buf;
-    (void)nbyte;
+    if (fildes == 1) // stdout
+    {
+        for (int i = 0; i < nbyte; i++) {
+            Serial.WriteChar((char)((char*)buf)[i]);
+        }
+
+        ret (long)(nbyte);
+    }
+
+    throw Exception.RuntimeError -> "write not fully implmented";
+    
     ret 0;
 }
 
@@ -271,11 +289,38 @@ expose fun shutdown(int sockfd, int how) -> int
 }
 
 [Export]
+expose fun closesocket(uint* s) -> int
+{
+    (void)s;
+    ret 0;
+}
+
+[Export]
+expose fun WSAGetLastError() -> int
+{
+    ret 0;
+}
+
+[Export]
+expose fun WSAStartup(int wVersionRequired, WSAData* lpWSAData) -> int
+{
+    (void)wVersionRequired;
+    (void)lpWSAData;
+    ret 0;
+}
+
+[Export]
+expose fun WSACleanup() -> int
+{
+    ret 0;
+}
+
+[Export]
 [Literal]
 expose fun exit(int status) -> void
 {
     breaklabel:
-    BRK
+    CALL _native_hcf
     J #breaklabel
 }
 

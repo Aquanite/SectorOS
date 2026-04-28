@@ -18,3 +18,8 @@ expose fun WriteString(constant char* s) {
 expose fun Write(char* s) {
     WriteString(s);
 }
+
+expose fun WriteLine(char* s) {
+    WriteString(s);
+    WriteChar('\n');
+}
