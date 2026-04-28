@@ -1,26 +1,18 @@
+BSEMU := bsemu
 BSEMUFLAGS := --max-steps=0
-BSEMUFILE := sector.bin
+EMULATEE := sector.bin
 
-CHANCEPROJ := sector.ceproj
-
-CHANCEFLAGS := --freestanding
-
-IS_WSL := $(shell grep -qi microsoft /proc/version 2>/dev/null && echo 1 || echo 0)
+CE := chancec
+CEPROJ := sector.ceproj
+CEFLAGS := --freestanding
 
 .PHONY: all build emulate
 
-all: build emulate
+all: build
+run: build emulate
 
 build:
-ifeq ($(OS),Windows_NT)
-	chancec $(CHANCEPROJ) $(CHANCEFLAGS)
-else
-	sudo chancec $(CHANCEPROJ) $(CHANCEFLAGS)
-endif
+$(CE) $(CEPROJ) $(CEFLAGS)
 
 emulate:
-ifeq ($(IS_WSL), 1)
-	bsemu.exe $(BSEMUFILE) $(BSEMUFLAGS)
-else
-	bsemu $(BSEMUFILE) $(BSEMUFLAGS)
-endif
+$(BSEMU) $(EMULATEE) $(BSEMUFLAGS)
