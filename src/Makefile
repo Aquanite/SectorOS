@@ -4,7 +4,7 @@ EMULATEE := sector.bin
 
 CE := chancec
 CEPROJ := sector.ceproj
-CEFLAGS := --freestanding
+CEFLAGS := -O3
 
 .PHONY: all build emulate
 
@@ -12,7 +12,7 @@ all: build
 run: build emulate
 
 build:
-$(CE) $(CEPROJ) $(CEFLAGS)
+	$(CE) $(CEPROJ) $(CEFLAGS)
 
 emulate:
-$(BSEMU) $(EMULATEE) $(BSEMUFLAGS)
+	$(BSEMU) $(EMULATEE) $(BSEMUFLAGS)
